@@ -1,0 +1,579 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Inter',sans-serif;color:#1a2233;background:#F8FAFC;}
+h1,h2,h3,h4,.heading{font-family:'Poppins',sans-serif;}
+.page{display:none;}.page.active{display:block;}
+.nav{background:#0A2540;padding:0 28px;height:64px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;box-shadow:0 2px 12px rgba(10,37,64,0.2);}
+.nav-logo{display:flex;align-items:center;gap:10px;}
+.nav-logo-icon{width:36px;height:36px;background:linear-gradient(135deg,#0F4C81,#1a6fd4);border-radius:10px;display:flex;align-items:center;justify-content:center;}
+.nav-logo-text{font-family:'Poppins',sans-serif;font-size:16px;font-weight:600;color:#fff;}
+.nav-logo-text span{color:#F4B942;}
+.nav-cta{background:#F4B942;color:#0A2540;border:none;padding:10px 20px;border-radius:8px;font-family:'Poppins',sans-serif;font-size:13px;font-weight:700;cursor:pointer;transition:all .2s;}
+.nav-cta:hover{background:#f5c85a;transform:translateY(-1px);}
+.nav-back{background:transparent;color:rgba(255,255,255,0.8);border:1px solid rgba(255,255,255,0.25);padding:8px 16px;border-radius:8px;font-size:13px;cursor:pointer;}
+.nav-back:hover{background:rgba(255,255,255,0.1);}
+.hero{background:linear-gradient(135deg,#0A2540 0%,#0F4C81 60%,#1a6fd4 100%);padding:64px 28px 72px;text-align:center;position:relative;overflow:hidden;}
+.hero::before{content:'';position:absolute;top:-100px;right:-80px;width:360px;height:360px;border-radius:50%;background:rgba(244,185,66,0.07);pointer-events:none;}
+.hero-pill{display:inline-flex;align-items:center;gap:8px;background:rgba(244,185,66,0.15);border:1px solid rgba(244,185,66,0.35);color:#F4B942;font-size:12px;font-weight:700;padding:6px 18px;border-radius:99px;margin-bottom:24px;font-family:'Poppins',sans-serif;letter-spacing:.03em;}
+.hero h1{font-family:'Poppins',sans-serif;font-size:34px;font-weight:700;color:#fff;line-height:1.25;margin-bottom:16px;}
+.hero h1 span{color:#F4B942;}
+.hero p{color:rgba(255,255,255,0.72);font-size:15px;max-width:460px;margin:0 auto 32px;line-height:1.75;}
+.hero-btn{background:#F4B942;color:#0A2540;border:none;padding:15px 38px;border-radius:10px;font-family:'Poppins',sans-serif;font-size:15px;font-weight:700;cursor:pointer;box-shadow:0 4px 20px rgba(244,185,66,0.35);transition:all .2s;}
+.hero-btn:hover{background:#f5c85a;transform:translateY(-2px);}
+.hero-stats{display:grid;grid-template-columns:repeat(3,1fr);max-width:400px;margin:40px auto 0;background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.12);border-radius:14px;overflow:hidden;}
+.hero-stat{padding:18px 10px;text-align:center;border-right:1px solid rgba(255,255,255,0.1);}
+.hero-stat:last-child{border-right:none;}
+.hero-stat-num{font-family:'Poppins',sans-serif;font-size:24px;font-weight:700;color:#F4B942;}
+.hero-stat-label{font-size:11px;color:rgba(255,255,255,0.55);margin-top:3px;}
+.trust-bar{background:#0A2540;padding:20px 28px;text-align:center;}
+.trust-label{font-size:11px;color:rgba(255,255,255,0.4);text-transform:uppercase;letter-spacing:.1em;margin-bottom:12px;font-weight:600;}
+.trust-flags{display:flex;justify-content:center;gap:24px;flex-wrap:wrap;}
+.trust-flag{display:flex;flex-direction:column;align-items:center;gap:4px;}
+.trust-flag span:first-child{font-size:26px;}
+.trust-flag span:last-child{font-size:11px;color:rgba(255,255,255,0.6);font-weight:500;}
+.section{padding:56px 28px;}
+.section-label{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:#0F4C81;margin-bottom:8px;font-family:'Poppins',sans-serif;}
+.section-title{font-family:'Poppins',sans-serif;font-size:24px;font-weight:700;color:#0A2540;margin-bottom:8px;}
+.section-sub{color:#5a6a7e;font-size:14px;margin-bottom:32px;line-height:1.65;}
+.hiw-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:16px;}
+.hiw-card{background:#fff;border-radius:14px;padding:24px 16px;text-align:center;box-shadow:0 2px 14px rgba(10,37,64,0.07);border:1px solid #e8eef5;transition:transform .2s,box-shadow .2s;}
+.hiw-card:hover{transform:translateY(-4px);box-shadow:0 8px 28px rgba(10,37,64,0.12);}
+.hiw-icon-wrap{width:50px;height:50px;border-radius:14px;background:linear-gradient(135deg,#0F4C81,#1a6fd4);display:flex;align-items:center;justify-content:center;margin:0 auto 14px;}
+.hiw-icon-wrap i{font-size:22px;color:#fff;}
+.hiw-step{font-size:10px;font-weight:700;color:#F4B942;font-family:'Poppins',sans-serif;letter-spacing:.05em;margin-bottom:5px;}
+.hiw-title{font-family:'Poppins',sans-serif;font-size:13px;font-weight:600;color:#0A2540;margin-bottom:5px;}
+.hiw-desc{font-size:12px;color:#7a8a9e;line-height:1.55;}
+.why-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:16px;}
+.why-card{background:#fff;border-radius:14px;padding:24px 18px;box-shadow:0 2px 14px rgba(10,37,64,0.07);border:1px solid #e8eef5;border-top:4px solid #F4B942;transition:transform .2s;}
+.why-card:hover{transform:translateY(-3px);}
+.why-icon{font-size:26px;color:#0F4C81;margin-bottom:12px;}
+.why-title{font-family:'Poppins',sans-serif;font-size:13px;font-weight:600;color:#0A2540;margin-bottom:5px;}
+.why-desc{font-size:12px;color:#7a8a9e;line-height:1.55;}
+.cta-banner{background:linear-gradient(135deg,#0A2540,#0F4C81);padding:52px 28px;text-align:center;}
+.cta-banner h2{font-family:'Poppins',sans-serif;font-size:24px;font-weight:700;color:#fff;margin-bottom:8px;}
+.cta-banner p{color:rgba(255,255,255,0.65);font-size:14px;margin-bottom:24px;}
+/* FORM */
+.form-header{background:linear-gradient(135deg,#0A2540,#0F4C81);padding:24px 28px;text-align:center;}
+.form-header h2{font-family:'Poppins',sans-serif;font-size:19px;font-weight:700;color:#fff;}
+.form-header p{color:rgba(255,255,255,0.65);font-size:13px;margin-top:5px;}
+.form-body{max-width:600px;margin:0 auto;padding:32px 24px 56px;}
+.progress-wrap{background:#e2e8f0;border-radius:99px;height:6px;margin-bottom:7px;}
+.progress-fill{height:6px;border-radius:99px;background:linear-gradient(90deg,#0F4C81,#F4B942);transition:width .4s;}
+.step-label{font-size:12px;color:#7a8a9e;margin-bottom:24px;font-weight:500;}
+.step-panel{display:none;}.step-panel.active{display:block;}
+.form-group{margin-bottom:20px;}
+.form-group label{display:block;font-size:13px;color:#0A2540;margin-bottom:7px;font-weight:600;font-family:'Poppins',sans-serif;}
+input[type=text],input[type=number]{width:100%;padding:12px 14px;border:1.5px solid #d1dce8;border-radius:10px;font-size:14px;background:#fff;color:#1a2233;font-family:'Inter',sans-serif;transition:border .2s;}
+input[type=text]:focus,input[type=number]:focus{outline:none;border-color:#0F4C81;box-shadow:0 0 0 3px rgba(15,76,129,0.1);}
+.radio-group{display:grid;grid-template-columns:1fr 1fr;gap:8px;}
+.radio-item{display:flex;align-items:center;gap:9px;font-size:13px;cursor:pointer;padding:10px 13px;border:1.5px solid #d1dce8;border-radius:10px;background:#fff;transition:all .2s;font-family:'Inter',sans-serif;color:#1a2233;}
+.radio-item:hover{border-color:#0F4C81;background:#f0f6ff;}
+.radio-item input{width:auto;accent-color:#0F4C81;}
+.checkbox-group{display:grid;grid-template-columns:1fr 1fr;gap:8px;}
+.checkbox-item{display:flex;align-items:center;gap:9px;font-size:13px;cursor:pointer;padding:10px 13px;border:1.5px solid #d1dce8;border-radius:10px;background:#fff;transition:all .2s;font-family:'Inter',sans-serif;color:#1a2233;}
+.checkbox-item:hover{border-color:#0F4C81;background:#f0f6ff;}
+.checkbox-item input{width:auto;accent-color:#0F4C81;}
+.btn-primary{background:#0F4C81;color:#fff;border:none;padding:13px 24px;border-radius:10px;font-family:'Poppins',sans-serif;font-size:14px;font-weight:600;cursor:pointer;transition:all .2s;}
+.btn-primary:hover{background:#0a3d6b;}
+.btn-gold{background:#F4B942;color:#0A2540;border:none;padding:13px 24px;border-radius:10px;font-family:'Poppins',sans-serif;font-size:14px;font-weight:700;cursor:pointer;box-shadow:0 4px 14px rgba(244,185,66,0.3);transition:all .2s;}
+.btn-gold:hover{background:#f5c85a;}
+.btn-back{background:#fff;color:#5a6a7e;border:1.5px solid #d1dce8;padding:12px 18px;border-radius:10px;font-size:13px;cursor:pointer;font-family:'Inter',sans-serif;}
+.btn-back:hover{background:#f0f6ff;border-color:#0F4C81;}
+/* VALIDATION */
+.validation-box{border-radius:12px;padding:16px 18px;margin-bottom:20px;font-size:13px;line-height:1.6;}
+.validation-error{background:#fff0f0;border:1.5px solid #f5a0a0;color:#b91c1c;}
+.validation-warning{background:#fffbea;border:1.5px solid #f4d03f;color:#854d0e;}
+.validation-title{font-family:'Poppins',sans-serif;font-weight:700;font-size:14px;margin-bottom:6px;}
+/* RESULTS */
+.results-header{background:linear-gradient(135deg,#0A2540,#0F4C81);padding:24px 28px;}
+.results-header h2{font-family:'Poppins',sans-serif;font-size:19px;font-weight:700;color:#fff;}
+.results-header p{color:rgba(255,255,255,0.65);font-size:13px;margin-top:4px;}
+.filter-bar{display:flex;gap:8px;flex-wrap:wrap;padding:16px 20px 8px;background:#fff;border-bottom:1px solid #e8eef5;}
+.filter-btn{font-size:12px;font-weight:600;padding:6px 16px;border-radius:99px;border:1.5px solid #d1dce8;background:#fff;cursor:pointer;color:#5a6a7e;transition:all .2s;font-family:'Poppins',sans-serif;}
+.filter-btn:hover{border-color:#0F4C81;color:#0F4C81;}
+.filter-btn.active{background:#0F4C81;color:#fff;border-color:#0F4C81;}
+.results-body{padding:20px 20px 56px;}
+.result-card{background:#fff;border-radius:16px;padding:0;margin-bottom:18px;box-shadow:0 2px 16px rgba(10,37,64,0.07);border:1px solid #e8eef5;overflow:hidden;transition:all .2s;}
+.result-card:hover{transform:translateY(-2px);box-shadow:0 8px 32px rgba(10,37,64,0.12);}
+.card-top{padding:18px 20px 14px;}
+.card-bottom{padding:12px 20px;background:#f8fafc;border-top:1px solid #e8eef5;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;}
+.card-actions{display:flex;gap:8px;flex-wrap:wrap;}
+.btn-apply{background:#F4B942;color:#0A2540;border:none;padding:8px 18px;border-radius:8px;font-family:'Poppins',sans-serif;font-size:12px;font-weight:700;cursor:pointer;text-decoration:none;display:inline-block;transition:all .2s;}
+.btn-apply:hover{background:#f5c85a;}
+.btn-website{background:#fff;color:#0F4C81;border:1.5px solid #0F4C81;padding:7px 16px;border-radius:8px;font-family:'Poppins',sans-serif;font-size:12px;font-weight:600;cursor:pointer;text-decoration:none;display:inline-block;transition:all .2s;}
+.btn-website:hover{background:#f0f6ff;}
+.match-badge{display:inline-block;font-size:11px;font-weight:700;padding:3px 10px;border-radius:99px;font-family:'Poppins',sans-serif;}
+.match-high{background:#dcfce7;color:#15803d;}
+.match-medium{background:#fef3c7;color:#b45309;}
+.match-low{background:#fee2e2;color:#b91c1c;}
+.funded-full{background:#dcfce7;color:#15803d;}
+.funded-partial{background:#fef3c7;color:#b45309;}
+.funded-self{background:#fee2e2;color:#b91c1c;}
+.diff-easy{background:#dcfce7;color:#15803d;}
+.diff-moderate{background:#e0f2fe;color:#0369a1;}
+.diff-competitive{background:#fef3c7;color:#b45309;}
+.diff-high{background:#fee2e2;color:#b91c1c;}
+.tag{display:inline-block;font-size:11px;padding:3px 10px;border-radius:99px;background:#f0f6ff;color:#0F4C81;margin-right:4px;margin-top:4px;font-weight:500;}
+.score-ring{width:62px;height:62px;border-radius:50%;border:3px solid #F4B942;display:flex;flex-direction:column;align-items:center;justify-content:center;flex-shrink:0;background:#fff;box-shadow:0 2px 10px rgba(244,185,66,0.2);}
+.score-num{font-family:'Poppins',sans-serif;font-size:16px;font-weight:700;color:#0F4C81;line-height:1;}
+.score-pct{font-size:9px;color:#7a8a9e;}
+.why-section{background:#f0f6ff;border-radius:10px;padding:12px 14px;margin-top:12px;font-size:12px;}
+.why-row{display:flex;align-items:center;gap:8px;margin-bottom:5px;color:#1a2233;}
+.why-row:last-child{margin-bottom:0;}
+.why-row.missing{color:#b91c1c;}
+.why-toggle{font-size:11px;color:#0F4C81;font-weight:600;cursor:pointer;margin-top:10px;display:inline-block;font-family:'Poppins',sans-serif;}
+</style>
+
+<div id="page-home" class="page active">
+  <nav class="nav">
+    <div class="nav-logo">
+      <div class="nav-logo-icon"><i class="ti ti-school" style="font-size:18px;color:#fff;"></i></div>
+      <span class="nav-logo-text">Scholarship<span>Nav</span></span>
+    </div>
+    <button class="nav-cta" onclick="goTo('page-form')">Find Scholarships →</button>
+  </nav>
+  <div class="hero">
+    <div class="hero-pill">🎓 Empowering Pakistani Students Globally</div>
+    <h1>Your Gateway to<br><span>World-Class Scholarships</span></h1>
+    <p>Discover fully funded scholarships matched to your marks, budget, IELTS status, and goals — personalized for every Pakistani student.</p>
+    <button class="hero-btn" onclick="goTo('page-form')">🔍 Find My Scholarships — It's Free</button>
+    <div class="hero-stats">
+      <div class="hero-stat"><div class="hero-stat-num">15+</div><div class="hero-stat-label">Scholarships</div></div>
+      <div class="hero-stat"><div class="hero-stat-num">5</div><div class="hero-stat-label">Countries</div></div>
+      <div class="hero-stat"><div class="hero-stat-num">Free</div><div class="hero-stat-label">Always</div></div>
+    </div>
+  </div>
+  <div class="trust-bar">
+    <div class="trust-label">Scholarship destinations</div>
+    <div class="trust-flags">
+      <div class="trust-flag"><span>🇩🇪</span><span>Germany</span></div>
+      <div class="trust-flag"><span>🇭🇺</span><span>Hungary</span></div>
+      <div class="trust-flag"><span>🇹🇷</span><span>Türkiye</span></div>
+      <div class="trust-flag"><span>🇮🇹</span><span>Italy</span></div>
+      <div class="trust-flag"><span>🇨🇳</span><span>China</span></div>
+    </div>
+  </div>
+  <div class="section" style="background:#F8FAFC;">
+    <div style="max-width:760px;margin:0 auto;">
+      <div class="section-label">How it works</div>
+      <div class="section-title">From profile to scholarship in minutes</div>
+      <div class="section-sub">No registration required. Answer a few questions and get AI-powered matches instantly.</div>
+      <div class="hiw-grid">
+        <div class="hiw-card"><div class="hiw-icon-wrap"><i class="ti ti-user-circle"></i></div><div class="hiw-step">STEP 01</div><div class="hiw-title">Build your profile</div><div class="hiw-desc">Enter your marks, major, IELTS status, and budget</div></div>
+        <div class="hiw-card"><div class="hiw-icon-wrap"><i class="ti ti-sparkles"></i></div><div class="hiw-step">STEP 02</div><div class="hiw-title">Smart matching</div><div class="hiw-desc">Our engine scores each scholarship against your unique profile</div></div>
+        <div class="hiw-card"><div class="hiw-icon-wrap"><i class="ti ti-adjustments-horizontal"></i></div><div class="hiw-step">STEP 03</div><div class="hiw-title">Filter & compare</div><div class="hiw-desc">Sort by match strength, funding type, or country</div></div>
+        <div class="hiw-card"><div class="hiw-icon-wrap"><i class="ti ti-send"></i></div><div class="hiw-step">STEP 04</div><div class="hiw-title">Apply directly</div><div class="hiw-desc">Clickable links to official scholarship pages</div></div>
+      </div>
+    </div>
+  </div>
+  <div class="section" style="background:#fff;">
+    <div style="max-width:760px;margin:0 auto;">
+      <div class="section-label">Why choose us</div>
+      <div class="section-title">Built for Pakistani students</div>
+      <div class="section-sub">We understand the unique challenges Pakistani students face when searching for international opportunities.</div>
+      <div class="why-grid">
+        <div class="why-card"><div class="why-icon"><i class="ti ti-clock"></i></div><div class="why-title">Saves hours of research</div><div class="why-desc">No more browsing hundreds of websites. Get matches in under 3 minutes.</div></div>
+        <div class="why-card"><div class="why-icon"><i class="ti ti-target"></i></div><div class="why-title">Personalized results</div><div class="why-desc">Every recommendation is based on your specific academic profile.</div></div>
+        <div class="why-card"><div class="why-icon"><i class="ti ti-world"></i></div><div class="why-title">Global opportunities</div><div class="why-desc">Fully funded scholarships across Europe and Asia.</div></div>
+        <div class="why-card"><div class="why-icon"><i class="ti ti-lock-open"></i></div><div class="why-title">Always free</div><div class="why-desc">No fees, no sign-up, no hidden costs. For every student.</div></div>
+      </div>
+    </div>
+  </div>
+  <div class="cta-banner">
+    <h2>Ready to find your scholarship?</h2>
+    <p>Takes less than 3 minutes · No registration · Completely free</p>
+    <button class="btn-gold" style="font-size:15px;padding:14px 40px;" onclick="goTo('page-form')">Get Started Now →</button>
+  </div>
+  <div style="background:#0A2540;padding:16px 28px;text-align:center;"><p style="font-size:12px;color:rgba(255,255,255,0.3);">© 2026 ScholarshipNav Pakistan · Empowering Pakistani students worldwide</p></div>
+</div>
+
+<div id="page-form" class="page">
+  <nav class="nav">
+    <div class="nav-logo"><div class="nav-logo-icon"><i class="ti ti-school" style="font-size:18px;color:#fff;"></i></div><span class="nav-logo-text">Scholarship<span>Nav</span></span></div>
+    <button class="nav-back" onclick="goTo('page-home')">← Home</button>
+  </nav>
+  <div class="form-header"><h2>Build Your Academic Profile</h2><p>4 quick steps · Smart validation · Personalized matches</p></div>
+  <div class="form-body">
+    <div class="progress-wrap"><div class="progress-fill" id="progress-fill" style="width:25%"></div></div>
+    <p class="step-label" id="step-label">Step 1 of 4 — Basic Information</p>
+    <div id="validation-box" style="display:none;"></div>
+
+    <div id="step-1" class="step-panel active">
+      <div class="form-group"><label>Full Name</label><input type="text" id="f-name" placeholder="Your full name"></div>
+      <div class="form-group"><label>Age</label><input type="number" id="f-age" placeholder="e.g. 22" min="10" max="70"></div>
+      <div class="form-group"><label>Education Level to Pursue</label>
+        <div class="radio-group">
+          <label class="radio-item"><input type="radio" name="edu-level" value="Bachelor's"> Bachelor's</label>
+          <label class="radio-item"><input type="radio" name="edu-level" value="Master's"> Master's</label>
+          <label class="radio-item"><input type="radio" name="edu-level" value="MPhil"> MPhil</label>
+          <label class="radio-item"><input type="radio" name="edu-level" value="PhD"> PhD</label>
+        </div>
+      </div>
+      <div class="form-group"><label>Current Qualification</label>
+        <div class="radio-group">
+          <label class="radio-item"><input type="radio" name="current-qual" value="FSc"> FSc</label>
+          <label class="radio-item"><input type="radio" name="current-qual" value="A Levels"> A Levels</label>
+          <label class="radio-item"><input type="radio" name="current-qual" value="Intermediate"> Intermediate</label>
+          <label class="radio-item"><input type="radio" name="current-qual" value="Bachelor's Degree"> Bachelor's Degree</label>
+          <label class="radio-item"><input type="radio" name="current-qual" value="Master's Degree"> Master's Degree</label>
+        </div>
+      </div>
+      <div class="form-group"><label>Graduation Status</label>
+        <div class="radio-group">
+          <label class="radio-item"><input type="radio" name="grad-status" value="Completed"> Completed</label>
+          <label class="radio-item"><input type="radio" name="grad-status" value="In Progress"> In Progress</label>
+        </div>
+      </div>
+      <button class="btn-primary" style="width:100%;margin-top:4px;" onclick="validateAndNext(2)">Continue →</button>
+    </div>
+
+    <div id="step-2" class="step-panel">
+      <div class="form-group"><label>Your Marks / GPA (%)</label><input type="number" id="f-marks" placeholder="e.g. 85" min="0" max="100"></div>
+      <div class="form-group"><label>Intended Major</label>
+        <div class="radio-group">
+          <label class="radio-item"><input type="radio" name="major" value="Computer Science"> Computer Science</label>
+          <label class="radio-item"><input type="radio" name="major" value="AI"> Artificial Intelligence</label>
+          <label class="radio-item"><input type="radio" name="major" value="Engineering"> Engineering</label>
+          <label class="radio-item"><input type="radio" name="major" value="Business"> Business</label>
+          <label class="radio-item"><input type="radio" name="major" value="Medical Sciences"> Medical Sciences</label>
+          <label class="radio-item"><input type="radio" name="major" value="Social Sciences"> Social Sciences</label>
+          <label class="radio-item"><input type="radio" name="major" value="Other"> Other</label>
+        </div>
+      </div>
+      <div class="form-group"><label>Study Abroad Budget</label>
+        <div class="radio-group">
+          <label class="radio-item"><input type="radio" name="budget" value="low"> Low — fully funded only</label>
+          <label class="radio-item"><input type="radio" name="budget" value="medium"> Medium — partial ok</label>
+          <label class="radio-item"><input type="radio" name="budget" value="high"> High — self-funded ok</label>
+        </div>
+      </div>
+      <div style="display:flex;gap:10px;margin-top:4px;">
+        <button class="btn-back" style="flex:1;" onclick="nextStep(1)">← Back</button>
+        <button class="btn-primary" style="flex:2;" onclick="nextStep(3)">Continue →</button>
+      </div>
+    </div>
+
+    <div id="step-3" class="step-panel">
+      <div class="form-group"><label>English Proficiency</label>
+        <div class="radio-group">
+          <label class="radio-item"><input type="radio" name="ielts" value="none"> IELTS not taken</label>
+          <label class="radio-item"><input type="radio" name="ielts" value="planned"> IELTS planned</label>
+          <label class="radio-item"><input type="radio" name="ielts" value="completed"> IELTS completed</label>
+          <label class="radio-item"><input type="radio" name="ielts" value="other"> Other English test</label>
+        </div>
+      </div>
+      <div class="form-group" id="ielts-score-group" style="display:none;"><label>IELTS Score</label><input type="number" id="f-ielts" placeholder="e.g. 6.5" min="0" max="9" step="0.5"></div>
+      <div class="form-group"><label>Preferred Countries</label>
+        <div class="checkbox-group">
+          <label class="checkbox-item"><input type="checkbox" name="pref-country" value="Germany"> 🇩🇪 Germany</label>
+          <label class="checkbox-item"><input type="checkbox" name="pref-country" value="Hungary"> 🇭🇺 Hungary</label>
+          <label class="checkbox-item"><input type="checkbox" name="pref-country" value="Turkey"> 🇹🇷 Türkiye</label>
+          <label class="checkbox-item"><input type="checkbox" name="pref-country" value="Italy"> 🇮🇹 Italy</label>
+          <label class="checkbox-item"><input type="checkbox" name="pref-country" value="China"> 🇨🇳 China</label>
+          <label class="checkbox-item"><input type="checkbox" name="pref-country" value="Any"> 🌍 Any country</label>
+        </div>
+      </div>
+      <div style="display:flex;gap:10px;margin-top:4px;">
+        <button class="btn-back" style="flex:1;" onclick="nextStep(2)">← Back</button>
+        <button class="btn-primary" style="flex:2;" onclick="nextStep(4)">Continue →</button>
+      </div>
+    </div>
+
+    <div id="step-4" class="step-panel">
+      <div class="form-group"><label>Leadership Experience</label>
+        <div class="radio-group">
+          <label class="radio-item"><input type="radio" name="leadership" value="yes"> Yes</label>
+          <label class="radio-item"><input type="radio" name="leadership" value="no"> No</label>
+        </div>
+      </div>
+      <div class="form-group"><label>Extracurricular Activities <span style="font-weight:400;color:#7a8a9e;">(select all that apply)</span></label>
+        <div class="checkbox-group">
+          <label class="checkbox-item"><input type="checkbox" name="extra" value="Sports"> 🏅 Sports</label>
+          <label class="checkbox-item"><input type="checkbox" name="extra" value="Student Leadership"> 👑 Student Leadership</label>
+          <label class="checkbox-item"><input type="checkbox" name="extra" value="Volunteering"> 🤝 Volunteering</label>
+          <label class="checkbox-item"><input type="checkbox" name="extra" value="Competitions"> 🏆 Competitions</label>
+          <label class="checkbox-item"><input type="checkbox" name="extra" value="Research Projects"> 🔬 Research Projects</label>
+          <label class="checkbox-item"><input type="checkbox" name="extra" value="Startup"> 🚀 Startup / Entrepreneurship</label>
+          <label class="checkbox-item"><input type="checkbox" name="extra" value="Community Service"> 💚 Community Service</label>
+          <label class="checkbox-item"><input type="checkbox" name="extra" value="Debate"> 🎤 Debate / Public Speaking</label>
+          <label class="checkbox-item"><input type="checkbox" name="extra" value="Other"> ➕ Other</label>
+        </div>
+      </div>
+      <div style="display:flex;gap:10px;margin-top:4px;">
+        <button class="btn-back" style="flex:1;" onclick="nextStep(3)">← Back</button>
+        <button class="btn-gold" style="flex:2;" onclick="findScholarships()">🔍 Find My Scholarships</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="page-results" class="page">
+  <nav class="nav">
+    <div class="nav-logo"><div class="nav-logo-icon"><i class="ti ti-school" style="font-size:18px;color:#fff;"></i></div><span class="nav-logo-text">Scholarship<span>Nav</span></span></div>
+    <button class="nav-back" onclick="goTo('page-form')">← Edit Profile</button>
+  </nav>
+  <div class="results-header"><h2 id="results-heading">Your Scholarship Matches</h2><p id="results-sub"></p></div>
+  <div class="filter-bar">
+    <button class="filter-btn active" id="btn-all" onclick="applyFilter('all')">All Results</button>
+    <button class="filter-btn" id="btn-high" onclick="applyFilter('high')">✅ High Chance</button>
+    <button class="filter-btn" id="btn-medium" onclick="applyFilter('medium')">🟡 Medium Chance</button>
+    <button class="filter-btn" id="btn-low" onclick="applyFilter('low')">🔴 Low Chance</button>
+    <button class="filter-btn" id="btn-full" onclick="applyFilter('full')">💰 Fully Funded</button>
+  </div>
+  <div class="results-body" id="results-list"></div>
+</div>
+
+<script>
+var DB=[
+  {id:1,country:"Germany",flag:"🇩🇪",name:"DAAD Scholarship",type:"full",typeLabel:"Fully Funded",applyUrl:"https://www.daad.de/en/study-and-research-in-germany/scholarships/",websiteUrl:"https://www.daad.de/en/",major:["Computer Science","AI","Engineering","Business","Social Sciences","Medical Sciences","Other"],minMarks:75,ieltsRequired:true,minIelts:6.0,budget:["low","medium","high"],level:["Master's","PhD","MPhil"],deadline:"Nov 2026",desc:"Germany's most prestigious scholarship covering tuition, living costs, and international travel.",leadership:false,research:false,difficulty:"Competitive",diffCls:"diff-competitive"},
+  {id:2,country:"Germany",flag:"🇩🇪",name:"Deutschlandstipendium",type:"partial",typeLabel:"Partial Funding",applyUrl:"https://www.deutschlandstipendium.de/en/",websiteUrl:"https://www.deutschlandstipendium.de/en/",major:["Computer Science","AI","Engineering","Business"],minMarks:80,ieltsRequired:false,budget:["medium","high"],level:["Bachelor's","Master's"],deadline:"Aug 2026",desc:"Merit-based scholarship for top students at German universities. Requires strong academic record and leadership.",leadership:true,research:false,difficulty:"Competitive",diffCls:"diff-competitive"},
+  {id:3,country:"Germany",flag:"🇩🇪",name:"Konrad-Adenauer-Stiftung",type:"full",typeLabel:"Fully Funded",applyUrl:"https://www.kas.de/en/web/begabtenfoerderung-und-kultur/stipendien",websiteUrl:"https://www.kas.de/en/",major:["Social Sciences","Business","Other"],minMarks:70,ieltsRequired:true,minIelts:6.0,budget:["low","medium","high"],level:["Bachelor's","Master's","PhD"],deadline:"Jan 2027",desc:"Stipend for academically excellent students with social and political engagement.",leadership:true,research:false,difficulty:"Highly Competitive",diffCls:"diff-high"},
+  {id:4,country:"Hungary",flag:"🇭🇺",name:"Stipendium Hungaricum",type:"full",typeLabel:"Fully Funded",applyUrl:"https://stipendiumhungaricum.hu/apply/",websiteUrl:"https://stipendiumhungaricum.hu/",major:["Computer Science","AI","Engineering","Business","Medical Sciences","Social Sciences","Other"],minMarks:60,ieltsRequired:false,budget:["low","medium","high"],level:["Bachelor's","Master's","PhD"],deadline:"Jan 2027",desc:"Top government scholarship open to Pakistani students. No IELTS required. Covers tuition, accommodation, and stipend.",leadership:false,research:false,difficulty:"Moderate",diffCls:"diff-moderate"},
+  {id:5,country:"Hungary",flag:"🇭🇺",name:"Hungarian Government Grant",type:"partial",typeLabel:"Partial Funding",applyUrl:"https://studyinhungary.hu/",websiteUrl:"https://studyinhungary.hu/",major:["Engineering","Computer Science","Medical Sciences"],minMarks:65,ieltsRequired:false,budget:["medium","high"],level:["Bachelor's","Master's"],deadline:"Mar 2027",desc:"Government grant for STEM students with partial tuition coverage.",leadership:false,research:false,difficulty:"Moderate",diffCls:"diff-moderate"},
+  {id:6,country:"Hungary",flag:"🇭🇺",name:"Campus Mundi Exchange",type:"self",typeLabel:"Self-Funded",applyUrl:"https://www.campusmundi.hu/en",websiteUrl:"https://www.campusmundi.hu/en",major:["Business","Social Sciences","Other"],minMarks:55,ieltsRequired:false,budget:["medium","high"],level:["Bachelor's","Master's"],deadline:"Oct 2026",desc:"Exchange programme for studying one semester in Hungary with administrative support.",leadership:false,research:false,difficulty:"Easy",diffCls:"diff-easy"},
+  {id:7,country:"Turkey",flag:"🇹🇷",name:"Türkiye Bursları Scholarship",type:"full",typeLabel:"Fully Funded",applyUrl:"https://tbbs.turkiyeburslari.gov.tr/",websiteUrl:"https://www.turkiyeburslari.gov.tr/en",major:["Computer Science","AI","Engineering","Business","Medical Sciences","Social Sciences","Other"],minMarks:70,ieltsRequired:false,budget:["low","medium","high"],level:["Bachelor's","Master's","PhD","MPhil"],deadline:"Feb 2027",desc:"Prestigious government scholarship covering tuition, accommodation, health insurance, and monthly allowance. No IELTS needed.",leadership:true,research:false,difficulty:"Highly Competitive",diffCls:"diff-high"},
+  {id:8,country:"Turkey",flag:"🇹🇷",name:"YTB Research Fellowship",type:"partial",typeLabel:"Partial Funding",applyUrl:"https://ytb.gov.tr/en/",websiteUrl:"https://ytb.gov.tr/en/",major:["Social Sciences","Engineering","Other"],minMarks:65,ieltsRequired:false,budget:["medium","high"],level:["MPhil","PhD"],deadline:"Apr 2027",desc:"Research-focused fellowship for graduate students in Turkey with strong academic background.",leadership:false,research:true,difficulty:"Competitive",diffCls:"diff-competitive"},
+  {id:9,country:"Turkey",flag:"🇹🇷",name:"TÖMER Language + Study",type:"self",typeLabel:"Self-Funded",applyUrl:"https://tomer.ankara.edu.tr/en/",websiteUrl:"https://tomer.ankara.edu.tr/en/",major:["Other","Social Sciences","Business"],minMarks:50,ieltsRequired:false,budget:["medium","high"],level:["Bachelor's","Master's"],deadline:"Rolling",desc:"Study Turkish language and enroll in a degree programme at a Turkish university.",leadership:false,research:false,difficulty:"Easy",diffCls:"diff-easy"},
+  {id:10,country:"Italy",flag:"🇮🇹",name:"MAECI Italian Government Scholarship",type:"full",typeLabel:"Fully Funded",applyUrl:"https://studyinitaly.esteri.it/en/home",websiteUrl:"https://studyinitaly.esteri.it/en/home",major:["Computer Science","Engineering","Business","Social Sciences","Medical Sciences","AI","Other"],minMarks:70,ieltsRequired:false,budget:["low","medium","high"],level:["Bachelor's","Master's","PhD"],deadline:"May 2027",desc:"Italian Ministry scholarship covering full tuition and monthly stipend. Italian language course included.",leadership:false,research:false,difficulty:"Moderate",diffCls:"diff-moderate"},
+  {id:11,country:"Italy",flag:"🇮🇹",name:"Politecnico di Milano Excellence Award",type:"partial",typeLabel:"Partial Funding",applyUrl:"https://www.polimi.it/en/education/admissions/fee-waivers-and-scholarships",websiteUrl:"https://www.polimi.it/en/",major:["Computer Science","AI","Engineering"],minMarks:80,ieltsRequired:true,minIelts:5.5,budget:["medium","high"],level:["Master's"],deadline:"Apr 2027",desc:"Merit-based partial scholarship for top engineering and tech students at one of Europe's best universities.",leadership:false,research:false,difficulty:"Highly Competitive",diffCls:"diff-high"},
+  {id:12,country:"Italy",flag:"🇮🇹",name:"University of Bologna Study Grant",type:"partial",typeLabel:"Partial Funding",applyUrl:"https://www.unibo.it/en/study/scholarships-and-subsidies",websiteUrl:"https://www.unibo.it/en/",major:["Social Sciences","Business","Medical Sciences","Other"],minMarks:65,ieltsRequired:true,minIelts:5.5,budget:["medium","high"],level:["Bachelor's","Master's"],deadline:"Jun 2027",desc:"Partial tuition grant at one of Europe's oldest and most prestigious universities.",leadership:false,research:false,difficulty:"Competitive",diffCls:"diff-competitive"},
+  {id:13,country:"China",flag:"🇨🇳",name:"Chinese Government Scholarship (CSC)",type:"full",typeLabel:"Fully Funded",applyUrl:"https://www.csc.edu.cn/chuguo",websiteUrl:"http://en.csc.edu.cn/",major:["Computer Science","AI","Engineering","Business","Medical Sciences","Social Sciences","Other"],minMarks:60,ieltsRequired:false,budget:["low","medium","high"],level:["Bachelor's","Master's","PhD","MPhil"],deadline:"Mar 2027",desc:"Comprehensive scholarship covering tuition, accommodation, monthly stipend, and insurance. No IELTS required.",leadership:false,research:false,difficulty:"Moderate",diffCls:"diff-moderate"},
+  {id:14,country:"China",flag:"🇨🇳",name:"Confucius Institute Scholarship",type:"full",typeLabel:"Fully Funded",applyUrl:"https://www.chinesescholarshipcouncil.com/confucius-institute-scholarship/",websiteUrl:"http://www.hanban.org/",major:["Social Sciences","Business","Other"],minMarks:55,ieltsRequired:false,budget:["low","medium","high"],level:["Bachelor's","Master's"],deadline:"Mar 2027",desc:"For students passionate about Chinese language and culture studies. Covers tuition, accommodation, and stipend.",leadership:false,research:false,difficulty:"Easy",diffCls:"diff-easy"},
+  {id:15,country:"China",flag:"🇨🇳",name:"Belt and Road Initiative Scholarship",type:"full",typeLabel:"Fully Funded",applyUrl:"https://www.campuschina.org/",websiteUrl:"https://www.campuschina.org/",major:["Engineering","Computer Science","AI","Business"],minMarks:65,ieltsRequired:false,budget:["low","medium","high"],level:["Master's","PhD"],deadline:"Apr 2027",desc:"Fully funded for Pakistani students under the China-Pakistan BRI initiative. Highly strategic for STEM fields.",leadership:true,research:true,difficulty:"Competitive",diffCls:"diff-competitive"}
+];
+
+var matchedResults=[];
+
+// Age-level validation ranges
+var ageRanges={
+  "Bachelor's":{min:17,max:30,warn_low:17,warn_high:30},
+  "Master's":{min:21,max:40,warn_low:21,warn_high:40},
+  "MPhil":{min:22,max:45,warn_low:22,warn_high:45},
+  "PhD":{min:24,max:55,warn_low:24,warn_high:55}
+};
+
+function validateProfile(){
+  var age=parseInt(document.getElementById('f-age').value)||0;
+  var level=getVal('edu-level');
+  if(!age||!level) return {ok:true};
+  var range=ageRanges[level];
+  if(!range) return {ok:true};
+  // Hard block cases
+  if(age<14){return {ok:false,type:'error',title:'❌ Invalid Age',msg:'An age of '+age+' is not valid for any scholarship programme. Please enter your correct age.'};}
+  if(level==="PhD"&&age<20){return {ok:false,type:'error',title:'❌ Profile Inconsistency Detected',msg:'A PhD requires completing a Bachelor\'s and Master\'s degree first, which typically takes at least 6–7 years of study. An age of '+age+' with a PhD application is not realistic. Please review your education level or age.'};}
+  if(level==="Master's"&&age<18){return {ok:false,type:'error',title:'❌ Profile Inconsistency Detected',msg:'A Master\'s degree typically requires completing a Bachelor\'s first (4 years). An age of '+age+' with a Master\'s application appears inconsistent. Please review your profile.'};}
+  if(level==="MPhil"&&age<20){return {ok:false,type:'error',title:'❌ Profile Inconsistency Detected',msg:'An MPhil typically follows a Bachelor\'s degree. An age of '+age+' for an MPhil appears inconsistent with typical education timelines. Please review your profile.'};}
+  if(level==="Bachelor's"&&age<15){return {ok:false,type:'error',title:'❌ Profile Inconsistency Detected',msg:'A Bachelor\'s degree typically starts at age 17 or older. An age of '+age+' appears too young. Please review your information.'};}
+  // Soft warning cases
+  if(level==="PhD"&&age<24){return {ok:true,type:'warning',title:'⚠️ Unusual Profile — Please Review',msg:'Starting a PhD at age '+age+' is highly unusual as it typically requires completing a Bachelor\'s and Master\'s first. If this is accurate, some scholarships may still be available, but please double-check your details.'};}
+  if(level==="Master's"&&age<20){return {ok:true,type:'warning',title:'⚠️ Unusual Profile — Please Review',msg:'Applying for a Master\'s at age '+age+' is uncommon. Most students complete a Bachelor\'s first (ages 17–21). If this is correct, please proceed — some opportunities may still be available.'};}
+  return {ok:true};
+}
+
+function showValidationBox(v){
+  var box=document.getElementById('validation-box');
+  if(!v||(!v.type)){box.style.display='none';return;}
+  var cls=v.type==='error'?'validation-error':'validation-warning';
+  box.innerHTML='<div class="validation-box '+cls+'"><div class="validation-title">'+v.title+'</div><p>'+v.msg+'</p></div>';
+  box.style.display='block';
+}
+
+function validateAndNext(step){
+  var v=validateProfile();
+  if(!v.ok){showValidationBox(v);window.scrollTo(0,0);return;}
+  showValidationBox(v.type?v:null);
+  nextStep(step);
+}
+
+function goTo(id){
+  document.querySelectorAll('.page').forEach(function(p){p.classList.remove('active');});
+  document.getElementById(id).classList.add('active');
+  window.scrollTo(0,0);
+}
+
+function nextStep(s){
+  document.querySelectorAll('.step-panel').forEach(function(p){p.classList.remove('active');});
+  document.getElementById('step-'+s).classList.add('active');
+  var labels=['','Basic Information','Academic Background','Language & Countries','Experience & Activities'];
+  document.getElementById('step-label').textContent='Step '+s+' of 4 — '+labels[s];
+  document.getElementById('progress-fill').style.width=(s*25)+'%';
+  window.scrollTo(0,0);
+}
+
+document.querySelectorAll('input[name="ielts"]').forEach(function(r){
+  r.addEventListener('change',function(){
+    document.getElementById('ielts-score-group').style.display=this.value==='completed'?'block':'none';
+  });
+});
+
+function getVal(n){var e=document.querySelector('input[name="'+n+'"]:checked');return e?e.value:null;}
+function getChecked(n){return Array.from(document.querySelectorAll('input[name="'+n+'"]:checked')).map(function(c){return c.value;});}
+
+function calcScore(s,marks,ielts,ieltsScore,budget,major,level,prefs,lead,extras){
+  var score=0;var reasons=[];var missing=[];
+
+  // Level match — strict
+  if(s.level.indexOf(level)===-1){return {score:0,reasons:[],missing:['Education level does not match this scholarship']};}
+
+  // Marks
+  if(marks>=s.minMarks+15){score+=28;reasons.push('Academic marks: Excellent fit');}
+  else if(marks>=s.minMarks+5){score+=22;reasons.push('Academic marks: Good fit');}
+  else if(marks>=s.minMarks){score+=14;reasons.push('Academic marks: Meets minimum');}
+  else if(marks>=s.minMarks-8){score+=5;}
+  else{missing.push('GPA below minimum requirement (need '+s.minMarks+'%)');}
+
+  // IELTS
+  if(s.ieltsRequired){
+    if(ielts==='completed'&&ieltsScore>=(s.minIelts||6.0)){score+=22;reasons.push('IELTS score meets requirement');}
+    else if(ielts==='completed'&&ieltsScore>0){score+=8;missing.push('IELTS score below required band ('+(s.minIelts||6.0)+')');}
+    else if(ielts==='planned'){score+=6;missing.push('IELTS required — you plan to take it');}
+    else if(ielts==='other'){score+=10;reasons.push('Alternative English test accepted');}
+    else{score+=0;missing.push('IELTS required but not taken');}
+  } else {
+    score+=22;
+    if(ielts==='completed'){reasons.push('IELTS completed — adds strength');}
+    else{reasons.push('No IELTS required for this scholarship');}
+  }
+
+  // Budget
+  if(s.budget.indexOf(budget)>-1){score+=18;reasons.push('Budget compatibility: Good match');}
+  else if(budget==='high'){score+=10;}
+  else{missing.push('Funding type may not match your budget');}
+
+  // Major
+  if(s.major.indexOf(major)>-1){score+=14;reasons.push('Field of study: '+major+' is eligible');}
+  else{score+=3;missing.push('Your major may not be prioritized for this scholarship');}
+
+  // Country preference
+  if(prefs.length===0||prefs.indexOf('Any')>-1||prefs.indexOf(s.country)>-1){score+=8;reasons.push('Country preference: '+s.country+' matches');}
+
+  // Leadership
+  if(s.leadership){
+    if(lead==='yes'){score+=6;reasons.push('Leadership experience: Required and provided');}
+    else{missing.push('Leadership experience is required or preferred');}
+  } else if(lead==='yes'){score+=3;reasons.push('Leadership experience adds strength');}
+
+  // Research / extracurriculars
+  var hasResearch=extras.indexOf('Research Projects')>-1;
+  if(s.research){
+    if(hasResearch){score+=4;reasons.push('Research experience: Matches scholarship focus');}
+    else{missing.push('Research experience preferred for this scholarship');}
+  } else if(hasResearch){score+=2;reasons.push('Research experience adds strength');}
+
+  // Extra activities bonus
+  var extraBonus=Math.min(extras.length,3);
+  if(extraBonus>0){score+=extraBonus;reasons.push('Extracurricular activities: '+extras.length+' listed');}
+
+  return {score:Math.min(score,100),reasons:reasons,missing:missing};
+}
+
+function getChanceLabel(score){
+  if(score>=70)return{label:'High Chance',cls:'match-high',dot:'✅',filter:'high'};
+  if(score>=45)return{label:'Medium Chance',cls:'match-medium',dot:'🟡',filter:'medium'};
+  return{label:'Low Chance',cls:'match-low',dot:'🔴',filter:'low'};
+}
+
+function findScholarships(){
+  // Final validation
+  var v=validateProfile();
+  if(!v.ok){showValidationBox(v);nextStep(1);return;}
+
+  var marks=parseFloat(document.getElementById('f-marks').value)||0;
+  var ielts=getVal('ielts')||'none';
+  var ieltsScore=parseFloat(document.getElementById('f-ielts').value)||0;
+  var budget=getVal('budget')||'low';
+  var major=getVal('major')||'Other';
+  var level=getVal('edu-level')||"Bachelor's";
+  var lead=getVal('leadership')||'no';
+  var prefs=getChecked('pref-country');
+  var extras=getChecked('extra');
+  var name=document.getElementById('f-name').value||'Student';
+
+  matchedResults=DB.map(function(s){
+    var r=calcScore(s,marks,ielts,ieltsScore,budget,major,level,prefs,lead,extras);
+    return Object.assign({},s,{score:r.score,reasons:r.reasons,missing:r.missing});
+  }).filter(function(s){return s.score>0;}).sort(function(a,b){return b.score-a.score;});
+
+  document.getElementById('results-heading').textContent=name+"'s Scholarship Matches";
+  document.getElementById('results-sub').textContent=matchedResults.length+' matched opportunities · Sorted by chance of success';
+  applyFilter('all');
+  goTo('page-results');
+}
+
+function applyFilter(f){
+  document.querySelectorAll('.filter-btn').forEach(function(b){b.classList.remove('active');});
+  var btn=document.getElementById('btn-'+f);
+  if(btn)btn.classList.add('active');
+  var list;
+  if(f==='high')list=matchedResults.filter(function(s){return s.score>=70;});
+  else if(f==='medium')list=matchedResults.filter(function(s){return s.score>=45&&s.score<70;});
+  else if(f==='low')list=matchedResults.filter(function(s){return s.score<45;});
+  else if(f==='full')list=matchedResults.filter(function(s){return s.type==='full';});
+  else list=matchedResults;
+  renderResults(list);
+}
+
+function toggleWhy(id){
+  var el=document.getElementById('why-'+id);
+  var btn=document.getElementById('why-btn-'+id);
+  if(el.style.display==='none'){el.style.display='block';btn.textContent='▲ Hide details';}
+  else{el.style.display='none';btn.textContent='▼ Why this matches you';}
+}
+
+function renderResults(list){
+  var c=document.getElementById('results-list');
+  if(!list||list.length===0){
+    c.innerHTML='<div style="text-align:center;padding:56px;color:#7a8a9e;"><div style="font-size:48px;margin-bottom:16px;">🔍</div><p style="font-family:Poppins,sans-serif;font-size:16px;font-weight:600;color:#0A2540;">No results for this filter</p><p style="font-size:13px;margin-top:8px;">Try a different filter or edit your profile</p></div>';
+    return;
+  }
+  var html='';
+  for(var i=0;i<list.length;i++){
+    var s=list[i];
+    var m=getChanceLabel(s.score);
+    var fc=s.type==='full'?'funded-full':s.type==='partial'?'funded-partial':'funded-self';
+    var reasonsHtml='';
+    for(var r=0;r<s.reasons.length;r++){reasonsHtml+='<div class="why-row">✅ '+s.reasons[r]+'</div>';}
+    for(var r=0;r<s.missing.length;r++){reasonsHtml+='<div class="why-row missing">⚠️ '+s.missing[r]+'</div>';}
+    html+='<div class="result-card">';
+    html+='<div class="card-top">';
+    html+='<div style="display:flex;align-items:flex-start;gap:14px;">';
+    html+='<div style="flex:1;min-width:0;">';
+    html+='<div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;flex-wrap:wrap;">';
+    html+='<span style="font-size:18px;">'+s.flag+'</span>';
+    html+='<span style="font-size:11px;font-weight:700;color:#0F4C81;font-family:Poppins,sans-serif;text-transform:uppercase;letter-spacing:.05em;">'+s.country+'</span>';
+    html+='<span class="match-badge '+s.diffCls+'">'+s.difficulty+'</span>';
+    html+='</div>';
+    html+='<p style="font-family:Poppins,sans-serif;font-size:15px;font-weight:700;color:#0A2540;margin-bottom:7px;">'+s.name+'</p>';
+    html+='<p style="font-size:13px;color:#5a6a7e;line-height:1.65;margin-bottom:10px;">'+s.desc+'</p>';
+    html+='<span class="match-badge '+fc+'" style="margin-right:5px;">'+s.typeLabel+'</span>';
+    html+='<span class="tag">📅 '+s.deadline+'</span>';
+    html+='<span class="tag">'+s.level.join(' · ')+'</span>';
+    if(s.ieltsRequired){html+='<span class="tag" style="background:#fff0f0;color:#b91c1c;">⚠️ IELTS Required</span>';}
+    else{html+='<span class="tag" style="background:#dcfce7;color:#15803d;">✅ No IELTS</span>';}
+    if(reasonsHtml){
+      html+='<span class="why-toggle" id="why-btn-'+s.id+'" onclick="toggleWhy('+s.id+')">▼ Why this matches you</span>';
+      html+='<div class="why-section" id="why-'+s.id+'" style="display:none;">'+reasonsHtml+'</div>';
+    }
+    html+='</div>';
+    html+='<div style="display:flex;flex-direction:column;align-items:center;gap:8px;flex-shrink:0;">';
+    html+='<div class="score-ring"><span class="score-num">'+Math.round(s.score)+'</span><span class="score-pct">/ 100</span></div>';
+    html+='<span class="match-badge '+m.cls+'" style="white-space:nowrap;">'+m.dot+' '+m.label+'</span>';
+    html+='</div>';
+    html+='</div>';
+    html+='</div>';
+    html+='<div class="card-bottom">';
+    html+='<div class="card-actions">';
+    html+='<a href="'+s.applyUrl+'" target="_blank" rel="noopener" class="btn-apply">🚀 Apply Now</a>';
+    html+='<a href="'+s.websiteUrl+'" target="_blank" rel="noopener" class="btn-website">🌐 Official Website</a>';
+    html+='</div>';
+    html+='</div>';
+    html+='</div>';
+  }
+  c.innerHTML=html;
+}
+</script>
